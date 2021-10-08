@@ -1,0 +1,15 @@
+# vscode
+.vscode
+
+# Mac
+.DS_Store
+._.DS_Store
+
+# python
+*.pyc
+*.pro
+*~
+__pycache__
+
+# jupyter notebook
+.ipynb_checkpoints

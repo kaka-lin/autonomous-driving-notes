@@ -1,6 +1,8 @@
 # Camera Calibration
 
-在我們開始做相機校正前，讓我們先來了解`失真(Distortion)`是怎麼發生的
+在我們開始做相機校正前，讓我們先來了解`失真(Distortion)`是怎麼發生的。
+
+PS: 如果你想直接看實作,請直接看: [camera_calibration.ipynb](./camera_calibration.ipynb)
 
 ## Pinhole Camera Model (針孔相機模型)
 

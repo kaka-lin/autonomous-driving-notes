@@ -1,16 +1,36 @@
 # LiDAR Basic Knowledge
 
 - [LiDAR Working Principle](#the-lidar-working-principle)
+- [LiDAR Equation](#the-lidar-equation)
 - [LiDAR Types](#lidar-types)
 - [LiDAR Selection Criteria](#lidar-selection-criteria)
 
 ## The LiDAR Working Principle
 
-The most common LiDAR sensor used today is called a "pulsed LiDAR". It is a system consisting of a laser source and a receiver with the source emitting short bursts of tight laser beams into a scene. When a beam hits an object, a fraction of the laser light is refracted back to the LiDAR sensor and can be detected by the receiver. Based on the time of flight of the laser light, the range R to the target can be computed using the equation:
+The most common LiDAR sensor used today is called a `pulsed LiDAR`. It is a system consisting of a laser source and a receiver with the source emitting short bursts of tight laser beams into a scene. When a beam hits an object, a fraction of the laser light is refracted(折射) back to the LiDAR sensor and can be detected by the receiver.
+
+LiDAR的工作原理是檢測並測量返回感測器中接收器的光。
+一些目標比其他目標反射的光線更好，這使它們更容易可靠地檢測和測量到感測器的最大範圍。例如:
+
+- 白色表面比黑色表面能夠反射更多的光:顏色較亮的目標空容易在長距離上受到可靠的測量。
+- 目標物表面的材料:類似鏡子的物體只能反射很小的聚焦光束。路標和車牌類似的物體將高百分比的光返回接收器。
+- 空氣中的環境
+- 旋轉時的數據更新率
+
+由於存在這些差異，`LiDAR的實際性能和最大有效範圍會根據目標表面的反射率而有所不同`。
+
+### Time of flight (TOF, 飛行時間測距)
+
+因為光的傳播速度遠大於汽車速度，所以將LiDAR和目標視為在所有這一切發生的幾奈秒內為靜止，因此可以算出近似的距離
+
+**Based on the time of flight of the laser light, the range R to the target can be computed using the equation:**
 
 $$ R=\frac{1}{2n} * c\Delta t $$
 
-where $c$ is the speed of light in vacuum and $n$ is the index of refraction of the propagation medium (for air, $n# can be assumed as `1.0`).
+where:
+
+- $c$ is the speed of light in vacuum (2.99 * 10^8 m/s)
+- $n$ is the index of refraction of the propagation medium (for air, $n$ can be assumed as `1.0`).
 
 Before we look at an example, let us first discuss the components of a typical LiDAR sensor:
 
@@ -22,13 +42,27 @@ In order to accurately measure the time between beam emission and detection, a v
 
 ![](images/lidar-beam-plus.png)
 
-### Range resoution
+#### Range resoution
 
-The attainable `range resolution` is directly proportional to the resolution of the timing device. A typical resolution value of the time interval measurement can be assumed to be in the 0.1 ns range, which results in a range resolution of 1.5 cm.
+The attainable `range resolution is directly proportional to the resolution of the timing device`. A typical resolution value of the time interval measurement can be assumed to be in the 0.1 ns range, which results in a range resolution of 1.5 cm.
+
+假設測量時間分辨率的值在 *0.1 ns* 範圍內，根據公式可得範圍分辨率為 *1.5 cm*。
+
+```
+R = 1/2 * 2.99 x 10^8 * 0.1 x 10^-9
+  = 0.15 * 10^-1 (m)
+  = 1.5 cm
+```
 
 #### Maximum range
 
-The `maximum range` at which a target can be detected is mainly determined by the energy losses of the laser beam during its travel through the atmosphere. The lower the return energy and the higher the ambient noise, the harder it is for the receiver to detect a clear flank. The ratio between signal energy and background noise is described by the signal-to-noise-ratio (SNR), which is shown for several signals returned from targets at varying distances.
+The `maximum range` at which a target can be detected is mainly determined by the energy losses of the laser beam during its travel through the atmosphere. The lower the return energy and the higher the ambient noise, the harder it is for the receiver to detect a clear flank. `The ratio between signal energy and background noise is described by the signal-to-noise-ratio (SNR)`, which is shown for several signals returned from targets at varying distances.
+
+如先前所說，`空氣中的環境也會影響LiDAR可檢測到目標的最大範圍`。
+主要取決於Laser在穿過大氣時的能量損失，返回的能量越低，帶表環境的噪音越大，就越難檢測到清晰的側面。
+
+信號能量和背景噪聲之間的比率由訊噪比(SNR)描述，當比率超過1:1(0 dB)，
+表示訊號大於雜訊，可推得SNR越大越好。
 
 ![](images/lidar-signal-returns-at-varying-distances%20-.png)
 
@@ -53,9 +87,14 @@ Other time-of-flight methods are radar and ultrasound. Of these three ToF techni
 
 With currently available LiDAR systems however, the maximum range at which objects can be detected is still inferior to radar, which limits the speed at which LiDAR can be used as a primary sensing device (e.g. in highway scenarios).
 
-### The LiDAR Equation
+## The LiDAR Equation
 
-In the last section, we have looked at the basic working principle of a time-of-flight pulsed LiDAR. You now know that two of the challenging factors which influence the detection quality of a LiDAR system are (a) beam coherence and (b) the signal-to-noise ratio. In this section, you will be briefly introduced to the so-called "LiDAR equation", which relates the power of a laser beam returned to the receiver with a number of factors, such as the transmission power in the sender, the target reflectivity and the atmospheric conditions between the optics and the target.
+In the last section, we have looked at the basic working principle of a `time-of-flight pulsed LiDAR`. You now know that two of the challenging factors which influence the detection quality of a LiDAR system are:
+
+- (a) `beam coherence`
+- (b) `signal-to-noise ratio(SNR)`.
+
+In this section, you will be briefly introduced to the so-called "LiDAR equation", which relates the power of a laser beam returned to the receiver with a number of factors, such as the transmission power in the sender, the target reflectivity and the atmospheric conditions between the optics and the target.
 
 Please note that there is not "one" LiDAR equation but several, depending on the area of application. `In automotive sensing, the following equation is used most frequently`:
 
@@ -69,9 +108,15 @@ Let us take a quick look at the individual parameters and their respective impli
 
     ![](images/reflectivity.png)
 
-As can be seen in the diagram, the reflectance varies significantly between the various samples (each cotton type is represented by an individual color). Also, reflectivity varies with the wavelength of the emitted laser light: For most materials, reflectivity is between 50 and 70% at a wavelength of around 1000nm and decreases to around 20-40% for 2500nm. A perfect reflection with no power loss would obviously be 100%.
+    As can be seen in the diagram, the reflectance varies significantly between the various samples (each cotton type is represented by an individual color). Also, reflectivity varies with the wavelength of the emitted laser light: `For most materials, reflectivity is between 50 and 70% at a wavelength of around 1000nm and decreases to around 20-40% for 2500nm. A perfect reflection with no power loss would obviously be 100%`.
 
-- `A_0`: *receiver aperture area* -> As with classical photography, the size of the aperture directly influences the amount of light passing through to impact onto the receiver. The larger the aperture, the higher the number of returning photons will be.
+    ```
+    反射率：
+      - 1000nm左右: 50-70%
+      - 2500nm: 20-40%
+    ```
+
+- `A_0`: *receiver aperture area* -> As with classical photography, the size of the aperture directly influences the amount of light passing through to impact onto the receiver. The larger the aperture, the higher the number of returning photons will be. (孔徑越大，返回的光子數就越多)
 - `η_0`: *transmission coefficient of receiver optics* -> When passing through a non-vacuum medium, photons are scattered due to obstructions in their flight path. The transmission coefficient indicates the degree of scattering, which the returning photons experience on their path through the optics. The more photons are lost, the fewer arrive at the receiver, which lowers the signal voltage level and thus the SNR.
 - `γ`: *atmospheric extinction coefficient* -> Similar to the optics transmission coefficient, the atmospheric extinction coefficient describes the amount of photon loss due to collisions with airborne particles in the atmosphere, such as water molecules or dust. The more particles are in the air, the fewer photons return to the receiver, which also lowers the SNR.
 
@@ -155,9 +200,13 @@ While FMCW LiDAR sensors have a great future ahead of them, they are still in an
 
     As LiDAR sensors shoot laser beams into the atmosphere, it must be ensured that they are not harmful to the naked eye. As you have seen in the previous section, there are three factors which influence eye safety, which are (a) emitter power, (b) pulse duration and (c) light frequency. Eye safety standards categorize LiDAR sensors based on their output optical power level. `For automotive applications, LiDAR sensors must either be classified as a Class 1 or Class 1M laser safety level`.
 
+- `Field of View (FOV)`
+
+    Autonomous vehicles must perceive their environment in a 360° circumference. Also, it must be ensured that the entire driving corridor with respect to the vehicle's height is observed. Both of these observations result in two parameters, which are the `horizontal field-of-view (HFOV)` and the `vertical field-of-view (VFOV)` of a sensor. If we consider the classic *Velodyne HDL 64E LiDAR, the HFOV is at 360° and the HFOV is at 26.9°*, which, from a roof-mounted position, is sufficient to scan the environment from close to far range. Instead of using a single sensor though, multiple sensors with overlapping FOV may be used to complement each other. In Waymo vehicles, for example, the three LiDAR sensors at the front with a comparatively narrow but overlapping HFOV are used to observe the front and side of the vehicle at close-range.
+
 - `Angular resolution`
 
-    A critical parameter which controls the density of the point-cloud is the angular resolution of a LiDAR sensor. It defines the number of laser beams the sensor can project into its FOV. For the Velodyne HDL 64E with its 64 individual beams, the vertical resolution is at ≈0.4° while the horizontal resolution is at ≈0.8° based on the number of scans over a full rotation of the mirror. In order to track features such as curb-sides or a bicycle frame, a very fine angular resolution both in the horizontal and vertical direction are needed.
+    A critical parameter which controls the density of the point-cloud is the angular resolution of a LiDAR sensor. It defines the number of laser beams the sensor can project into its FOV. *For the Velodyne HDL 64E with its 64 individual beams, the vertical resolution is at ≈0.4° while the horizontal resolution is at ≈0.8°* based on the number of scans over a full rotation of the mirror. In order to track features such as curb-sides or a bicycle frame, a very fine angular resolution both in the horizontal and vertical direction are needed.
 
 - `Number of points`
 
@@ -174,7 +223,7 @@ While FMCW LiDAR sensors have a great future ahead of them, they are still in an
 
 - `Frame rate`
 
-    The frame rate of a LiDAR sensor provides the number of full sweeps over both the HFOV and the VFOF. In case of the Velodyne HDL 64E, the frame rate can be adjusted between 5Hz and 20Hz, depending on the requirements of the application and on the number of points that the respective system can handle performance-wise. Other than with the frame rate of a camera though, LiDAR measurements might not be performed at the same time instant. As the sensor sweeps across the scene, moving objects change their position, which results in smeared and potentially elongated objects, which have to be corrected before processing them. For solid-state LiDAR sensors however, this is not the case.
+    `The frame rate of a LiDAR sensor provides the number of full sweeps over both the HFOV and the VFOF`. In case of the Velodyne HDL 64E, the frame rate can be adjusted between 5Hz and 20Hz, depending on the requirements of the application and on the number of points that the respective system can handle performance-wise. Other than with the frame rate of a camera though, LiDAR measurements might not be performed at the same time instant. As the sensor sweeps across the scene, moving objects change their position, which results in smeared and potentially elongated objects, which have to be corrected before processing them. For solid-state LiDAR sensors however, this is not the case.
 
     ```
     Compute the number of points

@@ -206,7 +206,7 @@ While FMCW LiDAR sensors have a great future ahead of them, they are still in an
 
 - `Angular resolution`
 
-    A critical parameter which controls the density of the point-cloud is the angular resolution of a LiDAR sensor. It defines the number of laser beams the sensor can project into its FOV. *For the Velodyne HDL 64E with its 64 individual beams, the vertical resolution is at ≈0.4° while the horizontal resolution is at ≈0.8°* based on the number of scans over a full rotation of the mirror. In order to track features such as curb-sides or a bicycle frame, a very fine angular resolution both in the horizontal and vertical direction are needed.
+    `A critical parameter which controls the density of the point-cloud is the angular resolution of a LiDAR sensor`. It defines the number of laser beams the sensor can project into its FOV. *For the Velodyne HDL 64E with its 64 individual beams, the vertical resolution is at ≈0.4° while the horizontal resolution is at ≈0.8°* based on the number of scans over a full rotation of the mirror. In order to track features such as curb-sides or a bicycle frame, a very fine angular resolution both in the horizontal and vertical direction are needed.
 
 - `Number of points`
 

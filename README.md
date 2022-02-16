@@ -9,6 +9,9 @@
 
 - [Computer Vision](https://github.com/kaka-lin/autonomous-driving-notes/tree/master/Computer%20Vision)
 
+- [LiDAR](https://github.com/kaka-lin/autonomous-driving-notes/tree/master/LiDAR)
+  - [3D Object Detection](https://github.com/kaka-lin/autonomous-driving-notes/tree/master/LiDAR/3D%20Object%20Detection)
+
 - #### Machine Learning related
 
     - [ML Notes](https://github.com/kaka-lin/ML-Notes)

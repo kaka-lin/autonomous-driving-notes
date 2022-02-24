@@ -20,7 +20,7 @@
 ![](images/measurement_update_1.png)
 ![](images/measurement_update_3.png)
 
-#### 公式:
+公式:
 
 ![](images/measuremen_update_formula.png)
 
@@ -34,9 +34,62 @@
 
 ![](images/prediction_1.png)
 
-#### 公式:
+公式:
 
 ![](images/prediction_formula.png)
+
+
+## How kalman filters work
+
+![](images/kalman_work_2.png)
+
+從上圖可觀察:
+
+- t = 2, 綠色高斯分佈:它只有位置的資訊但沒有速度相關的資訊。
+
+    但如果將在 prediction step 算出的值 (prior) 與 measurement step 算出的值相乘，會得到一個當前系統狀態的最佳估測值，他是一個高斯分佈 (上圖中紅綠相交的黑色高斯分佈)。這個高斯分佈對位置與速度都有一個很好的估測 (分別投影至 x 及 v)。
+
+    且如果採用這個高斯分佈進行下一個 Prediction step，會發現前進至下一個黑色的高斯分佈，此正式 t = 3 做一樣事情的結果。
+
+這就是卡爾曼濾波器的工作原理。
+
+## Kalman filters 公式
+
+卡爾曼濾波器有五個公式，分兩個部份:
+
+### 1. Prediction
+
+```
+X(k) = F(k) * X(k-1) + B(k) * U(k)
+P(k) = F(k) * P(k-l) * F^T(k) + Q(k)
+```
+- X: estimate
+- P: estimate covariance matrix
+- F: state-transition model
+- B: control-input model
+- U: control vector (motion vector)
+- Q: the covariance of the process noise
+
+![](images/kalman_formula_prediction.png)
+
+![](images/kalman_formula_prediction_2.png)
+
+### 2. Measurement Update
+
+```
+Y(k) = Z(k) - H(k) * X(k)
+S(k) = H(k) * P(k) H^T(k) + R(k)
+K(k) = P(k)* H^T(k) * S^-1(k)
+```
+
+- Z: measurement
+- H: measurement function
+- R: measurement noise
+
+![](images/kalman_formula_measurement.png)
+
+![](images/kalman_formula_measurement_2.png)
+
 
 ## Reference
 

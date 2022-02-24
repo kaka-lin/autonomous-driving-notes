@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 def gaussian(x, mean, std):
     std2 = np.power(std, 2)
     return (1 / np.sqrt(2* np.pi * std2)) * np.exp(-.5 * (x - mean)**2 / std2)

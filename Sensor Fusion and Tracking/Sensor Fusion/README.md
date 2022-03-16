@@ -1,12 +1,18 @@
 # Sensor Fusion
 
+介紹 Sensor Fusion 流程，如下圖:
+
 ![](images/sensor_fusion_flow.png)
+
+從上圖可以將流程大致分成三個部份，如下:
 
 - [Lidar Measurement Model](#lidar-measurement-model)
 - [Camera Measurement Model](#camera-measurement-model)
 - [Coordinate Transforms](#coordinate-transforms)
 
 Example:
+
+假設今天有一輛車，我們想要預估和追蹤這台車輛，如下:
 
 ![](images/example.png)
 
@@ -18,7 +24,7 @@ Example:
 
 ## Kalman Filter
 
-現在讓我們來看看 `Kalman Filter`，Please see [here](https://github.com/kaka-lin/autonomous-driving-notes/tree/master/Sensor%20Fusion/Kalman%20Filters)
+現在讓我們來複習 `Kalman Filter`，Please see [here](https://github.com/kaka-lin/autonomous-driving-notes/tree/master/Sensor%20Fusion/Kalman%20Filters)
 
 After we have a basic knowledge of `Kalman filter`, we can fit each equation to fusion flow chart as below:
 
@@ -46,7 +52,7 @@ After we have a basic knowledge of `Kalman filter`, we can fit each equation to 
 
 2. `3D object detection` with point cloud: the object detection gives us the object's position `(px, py)` as of measurement input for our Kalman filter.
 
-因此，model 在每個信號時間範圍(single timeframe)內檢測其他車輛，然後可以應用 kalman filter 來隨著時間推移跟蹤目標。
+因此，model 在每個信號時間範圍(single timeframe)內檢測其他車輛，然後可以應用 `kalman filter` 來隨著時間推移跟蹤目標。
 
 - `z`: is the `measurement vector`.
 
@@ -72,11 +78,9 @@ Noise vector `w`: is it a distribution with zero mean and a `2 x 2` covarance ma
 
 ![](images/measurement-noise-covariance-r.png)
 
-- R: measurement noise covarance matrix. Represents the `uncertainty in the position measurements we receive from the lidar sensor`.
+- R: `measurement noise covarance matrix`. Represents the `uncertainty in the position measurements we receive from the lidar sensor`.
 
     Generally, the parameters for the measurement noise covariance matrix will be provided by the sensor manufacturer or have to be determined in test drives.
-
-    In the mid-term project, you evaluated the standard deviation of your lidar detections in x and y, so you can directly use your results for R in the final project.
 
 ## Camera Measurement Model
 
@@ -104,7 +108,7 @@ Hence for camera, `γ=z−Hx becomes z−h(x)`.
 
 ### Extended Kalman Filter
 
-Please see [here](https://github.com/kaka-lin/autonomous-driving-notes/tree/master/Sensor%20Fusion/Kalman%20Filters)
+Please see [here](https://github.com/kaka-lin/autonomous-driving-notes/tree/master/Sensor%20Fusion%20and%20Tracking/Kalman%20Filters)
 
 ![](images/ekf-fusion-flow.png)
 

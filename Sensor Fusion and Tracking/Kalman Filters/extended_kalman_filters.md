@@ -57,7 +57,7 @@ h(x) ≈ x
 
 Now that you’ve seen how to do a Taylor series expansion with a one-dimensional equation, we’ll need to look at the Taylor series expansion for multi-dimensional equations. Recall from the [Camera Measurement Model]() part that the h function is composed of two equations that show how the predicted state `x` is mapped into the image space:
 
-![](../images/nonlinear-measurement-function.png)
+![](../Sensor%20Fusion/images/nonlinear-measurement-function.png)
 
 These are multi-dimensional equations, so we will need to use a multi-dimensional Taylor series expansion to make a linear approximation of the h function. Here is a general formula for the multi-dimensional Taylor series expansion:
 
@@ -89,4 +89,4 @@ please see [here](https://github.com/kaka-lin/nd013-c2-fusion-exercises/blob/mai
 
 ## EKF Algorithm
 
-![](../images/ekf-fusion-flow.png)
+![](../Sensor%20Fusion/images/ekf-fusion-flow.png)

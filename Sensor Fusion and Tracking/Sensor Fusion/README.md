@@ -24,7 +24,7 @@ Example:
 
 ## Kalman Filter
 
-現在讓我們來複習 `Kalman Filter`，Please see [here](https://github.com/kaka-lin/autonomous-driving-notes/tree/master/Sensor%20Fusion/Kalman%20Filters)
+現在讓我們來複習 `Kalman Filter`，Please see [here](https://github.com/kaka-lin/autonomous-driving-notes/blob/master/Sensor%20Fusion%20and%20Tracking/Kalman%20Filters/kalman_filters.md)
 
 After we have a basic knowledge of `Kalman filter`, we can fit each equation to fusion flow chart as below:
 
@@ -108,7 +108,7 @@ Hence for camera, `γ=z−Hx becomes z−h(x)`.
 
 ### Extended Kalman Filter
 
-Please see [here](https://github.com/kaka-lin/autonomous-driving-notes/tree/master/Sensor%20Fusion%20and%20Tracking/Kalman%20Filters)
+Please see [here](https://github.com/kaka-lin/autonomous-driving-notes/blob/master/Sensor%20Fusion%20and%20Tracking/Kalman%20Filters/extended_kalman_filters.md)
 
 ![](images/ekf-fusion-flow.png)
 

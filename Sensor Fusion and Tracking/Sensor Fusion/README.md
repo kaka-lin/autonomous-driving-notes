@@ -38,6 +38,16 @@ After we have a basic knowledge of `Kalman filter`, we can fit each equation to 
 
 ![](images/process-noise-covariance-q.png)
 
+If we assume the noise through acceleration in *x* and *y* to be equal,`ν_x = ν_y`, the continuous process noise covariance `Q` can be modelled as:
+
+![](images/process-noise-covariance-q-2.png)
+
+Discretizing this continuous model leads to a formula for `Q` depending on `Δt` as follows:
+
+![](images/process-noise-covariance-q-3.png)
+
+Here `q` is a design parameter and should be chosen `depending on the expected maximum change in velocity`. For highly dynamic maneuvers, we could use a higher process noise, e.g. $q=(8\,\frac{m}{s^2})^2$ would fit for emergency braking, whereas for normal situations on a highway e.g. $q=(3\,\frac{m}{s^2})^2$ could be an adequate choice.
+
 ## Lidar Measurement Model
 
 現在讓我們來看看光達的部分，如下:

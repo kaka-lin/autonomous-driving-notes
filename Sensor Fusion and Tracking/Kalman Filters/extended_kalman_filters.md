@@ -8,7 +8,7 @@ If we map this gaussian to a non-linear function `h` then the result is not a ga
 
 Example:
 
-我們使用從 `mean=0, std=3` 的高斯分佈中隨機抽取的 10000 個變數，然後計算 non-linear function `h(x) = atan(x)` 的值，可以看到結果不再是高斯分布，因為 kalman filter update function 將不再適用，如下圖所示:
+我們使用從 `mean=0, std=3` 的高斯分佈中隨機抽取的 10000 個變數，然後計算 non-linear function `h(x) = atan(x)` 的值，可以看到結果不再是高斯分布，因為 `kalman filter update function` 將不再適用，如下圖所示:
 
 ![](images/nonlinear-measurement-fn-2.png)
 
@@ -90,3 +90,6 @@ please see [here](https://github.com/kaka-lin/nd013-c2-fusion-exercises/blob/mai
 ## EKF Algorithm
 
 ![](../Sensor%20Fusion/images/ekf-fusion-flow.png)
+
+- Kalman update function: using Jacobian H, because we need result is Gaussian distribution
+- gamma: just using nonlinear h(x)

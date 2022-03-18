@@ -70,7 +70,14 @@ Whereas the `z` vector will only contain (px, py). Multiplying `Hx` allows us to
 
 我們的 `state is a 4D vector (px, py, vx, vy)` -> 找出正確 H 將資料從 `state-space 投影到 2D measurement space`
 
--> `H = [[1, 0, 0, 0], [0, 1, 0, 0]]`
+### LiDAR measurement matrix
+
+從上我們可得:
+
+```
+H = [[1, 0, 0, 0],
+     [0, 1, 0, 0]]
+```
 
 ### Measurement Noise Covariance Matrix R Explanation
 

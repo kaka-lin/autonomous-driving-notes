@@ -110,15 +110,30 @@ Based on the track score, a track state can be defined, for example `initialized
 
 ## Track Deletion
 
+![](images/track-delete.png)
+
+![](images/track-delete2.png)
+
+如上圖所示，當 Covariance P 變大時，物體可能出現在橢圓內的任何地方，此時就可以刪除此 track
+
 Example Track Deletion Criteria
 
-- Confirmed tracks:
-  - Delete if score < 0.6. This only holds for confirmed tracks, so the score must have been above 0.8 before and then drop below 0.6.
-  - Delete if  P_11 < 3^2 or P_22 < 3^2. This means our object could be anywhere inside a circle of 3 meters radius, the position uncertainty has increased so much that the track should be deleted.
+- `Confirmed tracks`:
+  - `Delete if score < 0.6`.
 
-- Tentative or initialized tracks:
-  - Delete if score < 0.17. Note that this threshold is much lower than for confirmed tracks, we don't want new tracks to be immediately deleted before they can stabilize.
-  - Delete if  P_11 < 3^2 or P_22 < 3^2.
+    This only holds for `confirmed` tracks, so the score must have been above 0.8 before and then drop below 0.6.
+
+  - `Delete if  P_11 > 3^2 or P_22 > 3^2`
+
+    Covariance metrics gets too big.
+    This means our object could be anywhere inside a circle of 3 meters radius, the position uncertainty has increased so much that the track should be deleted.
+
+- `Tentative or initialized tracks`:
+  - `Delete if score < 0.17`.
+
+    Note that this threshold is much lower than for confirmed tracks, we don't want new tracks to be immediately deleted before they can stabilize.
+
+  - `Delete if P_11 > 3^2 or P_22 > 3^2`.
 
 Again, these are heuristic design parameters, feel free to experiment and define your own in your project!
 

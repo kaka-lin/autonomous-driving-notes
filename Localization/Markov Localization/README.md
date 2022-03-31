@@ -1,12 +1,29 @@
 # Markov Localization
 
-`Markov Localization`, or `Bayes Filter` for Localization, is a `generalized filter` for localization and all other localization approaches are realizations of this approach.
-
-We don't know exactly where our vehicle is at any given time, but can approximate it' location. As such, *we generally think of our vehicle location as a probability distribution, each time we move, our distribution becomes more diffuse (wider) (分散，更廣泛)*. *We pass our variables (map data, observation data, and control data) into the filter to concentrate (narrow) (集中，縮小) this distribution*, at each time step. Each state prior to applying the filter represents our prior and the narrowed distribution represents our `Bayes' posterior`.
+`Markov Localization`, or `Bayes Filter for Localization`, is a `generalized filter` for localization and all other localization approaches are realizations of this approach.
 
 ![](images/markov-localization-4.png)
 
-Summary, please see [here](#finalize-the-bayes-localization-filter)
+We don't know exactly where our vehicle is at any given time, but can approximate it' location. As such, *we generally think of our vehicle location as a probability distribution, each time we move, our distribution becomes more diffuse (wider) (分散，更廣泛)*. *We pass our variables (map data, observation data, and control data) into the filter to concentrate (narrow) (集中，縮小) this distribution*, at each time step. Each `state prior` to applying the filter represents our `prior` and the `narrowed distribution` represents our `Bayes' posterior`.
+
+```
+我們通常認為我們的車輛位置是一個概率分佈，
+
+每次我們移動時:
+  我們的分佈變得更加分散(可分割，更廣泛)
+
+我們將變量(地圖數據、觀察數據和控制數據)傳遞到 filter 中，
+以在每個時間步集中(縮小)這個分佈。
+```
+
+- [Localization Posterior](#localization-posterior)
+  - [Initialize Belief State (Priors)](#initialize-belief-state-priors)
+
+  - [Define Posterior in recursive way](#define-posterior-in-recursive-way)
+
+- [Implementation Details for Motion Model](#implementation-details-for-motion-model)
+- [Markov Assumption for Observation Model](#markov-assumption-for-observation-model)
+- [Finalize the Bayes Localization Filter](#finalize-the-bayes-localization-filter)
 
 ## Localization Posterior
 
@@ -45,7 +62,7 @@ Summary, please see [here](#finalize-the-bayes-localization-filter)
 
 ### Bayes' Filter For Localization
 
-Please see [here]().
+![](images/bayes-localization.png)
 
 ### Calculate Localization Posterior
 
@@ -74,7 +91,7 @@ P(O|L) = P(L|O) * P(O) / P(L)
           =  1.40E-1
 ```
 
-### Initialize Belief State
+### Initialize Belief State (Priors)
 
 Let's walk through the process of `initializing our prior belief state`. That is, what values should our initial belief state take for each possible position?
 

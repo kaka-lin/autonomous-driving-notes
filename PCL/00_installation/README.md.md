@@ -1,26 +1,29 @@
-# Ch0 - Install Point Cloud Libraries
+# Install Point Cloud Libraries
 
 - [C++ version](#point-cloud-library)
 - [Python version](#python-pcl)
 
 ---
 
-## [Point Cloud Library](https://github.com/PointCloudLibrary/pcl)
+## Docker environment
 
-### Install on the platform
-
-- [Linux](https://pcl-tutorials.readthedocs.io/en/latest/compiling_pcl_posix.html)
-
-
-### Run with Docker
-
-#### Build
+### Build
 
 ```bash
-$ docker build --rm -f pcl.Dockerfile -t kakalin/pcl:1.8.0 .
+$ docker build --rm \
+    -t kakalin/pcl:1.8.0 \
+    -f pcl.Dockerfile  .
 ```
 
-#### Run
+### Python Only
+
+```bash
+$ docker build --rm \
+    -t kakalin/python-pcl:1.8.0 \
+    -f python-pcl.Dockerfile .
+```
+
+#### Runming
 
 ```bash
 $ xhost +local:root
@@ -34,10 +37,14 @@ $ docker run --rm -it \
     --volume="$PWD:/root/PCL" \
     --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
     --privileged \
-    kakalin/pcl:1.8.0
+    kakalin/pcl:1.8.0 # or kakalin/python-pcl:1.8.0
 ```
 
----
+## [Point Cloud Library](https://github.com/PointCloudLibrary/pcl)
+
+### Install on the platform
+
+- [Linux](https://pcl-tutorials.readthedocs.io/en/latest/compiling_pcl_posix.html)
 
 ## [python-pcl](https://github.com/strawlab/python-pcl)
 
@@ -93,28 +100,3 @@ Reference: [ubuntu下成功安裝python-pcl及各種錯誤解決](https://www.tw
     Extension("pcl.pcl_visualization", [
                             "pcl/pcl_visualization.pyx"], language="c++", **ext_args),
     ```
-
-### Run with Docker
-
-#### Build
-
-```bash
-$ docker build --rm -f python-pcl.Dockerfile -t kakalin/python-pcl:1.8.0 .
-```
-
-#### Run
-
-```bash
-$ xhost +local:root
-```
-
-```bash
-$ docker run --rm -it \
-    --gpus all \
-    -e DISPLAY=$DISPLAY \
-    -e QT_X11_NO_MITSHM=1 \
-    --volume="$PWD:/root/PCL" \
-    --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
-    --privileged \
-    kakalin/python-pcl:1.8.0
-```

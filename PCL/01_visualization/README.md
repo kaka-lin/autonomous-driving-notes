@@ -43,3 +43,9 @@ $ ./cloud_viewer
 ```bash
 $ python3 visiualization.py
 ```
+
+## Notes
+
+1. See `red/black/green` screen
+
+    What you're seeing is just the three axes zoomed in. Use the mouse wheel to scroll out and you'll see your scene.

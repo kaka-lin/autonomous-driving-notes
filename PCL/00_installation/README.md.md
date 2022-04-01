@@ -1,4 +1,4 @@
-# Install Point Cloud Libraries
+# Install Point Cloud Library
 
 - [C++ version](#point-cloud-library)
 - [Python version](#python-pcl)

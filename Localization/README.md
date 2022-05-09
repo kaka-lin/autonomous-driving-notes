@@ -14,3 +14,7 @@ and a given map.
 ## Markov Localization
 
 Please see [here](Markov%20Localization/README.md)
+
+## Scan Matching
+
+Please see [here](Scan%20Matching/README.md)

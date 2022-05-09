@@ -1,0 +1,27 @@
+Language: Cpp
+BasedOnStyle: Google
+ColumnLimit: 80
+IndentWidth: 2
+
+# "int& foo"
+DerivePointerAlignment: false
+PointerAlignment: Left
+
+IncludeBlocks:   Regroup
+IncludeCategories:
+  - Regex:           '^<ext/.*\.h>'
+    Priority:        2
+  - Regex:           '^<opencv2/'
+    Priority:        2
+  # first C system headers - they have a . in the filename
+  - Regex:           '^<.*\.h>'
+    Priority:        1
+  # then C++ system headers - no ., the only thing that will match now
+  - Regex:           '^<.*'
+    Priority:        1
+  - Regex:           '.*'
+    Priority:        3
+  # finally other "" includes go between system headers and our headers
+  - Regex:           '^"'
+    Priority:        4
+IncludeIsMainRegex: '([-_](test|unittest))?$'
